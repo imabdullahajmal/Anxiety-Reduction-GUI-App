@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="
+    +viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home - Anxiety Reduction App</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div class="branding">
+            <img id="logo" src="images/logo.png" alt="">
+            Anxiety Redution App
+        </div>
+        <a href="/home.html">Home</a>
+    </nav>
+    <div class="main">
+        <div class="inner">
+            <div id="note">
+                <h2>
+                    Meditation can help strengthen important parts of the brain. Although it may not be right for everyone,
+                </h2>
+            </div>
+            <div class="trainer">
+                <video id="vid" loop>
+                    <source src="images/PMR.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+                <div class="buttons">
+                    <button id="startbtn" onclick="playIt()">Start</button>
+                    <button id="pausebtn" onclick="stopIt()">Pause</button>
+                </div>
+        
+                <div class="timerBox">
+                    <p id="timer">5:00</p>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        var video = document.getElementById('vid')
+        function playIt(){
+            video.play()
+            startTimer()
+        }
+    
+        function stopIt(){
+            video.pause()
+            pauseTimer()
+        }
+    //----------------------------
+    
+    let timer;
+    let timeRemaining = 300; // 1 minute in seconds
+    let isPaused = false;
+    
+        function startTimer() {
+            isPaused=false
+            if (!timer) {
+                timer = setInterval(updateTimer, 1000);
+            }
+    }
+    
+    function pauseTimer() {
+        if(isPaused==false){
+            isPaused = !isPaused;
+        }
+    }
+    
+        function updateTimer() {
+        if (!isPaused) {
+            const minutes = Math.floor(timeRemaining / 60);
+            const seconds = timeRemaining % 60;
+    
+            document.getElementById('timer').innerText = `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
+    
+            if (timeRemaining > 0) {
+                timeRemaining--;
+            } else {
+                clearInterval(timer);
+                timer = null;
+                stopIt()
+                alert('Exercise Complete!');
+            }
+        }
+    }
+</script>
+</body>
+</html>
